@@ -1,5 +1,7 @@
 package com.assistancetrack.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.assistancetrack.bean.AddMemberBean;
 import com.assistancetrack.dao.AddMemberDao;
 import com.assistancetrack.model.AddMember;
-import com.assistancetrack.service.AddMemberService;
 
 @Controller
 public class AddMemberController {
@@ -23,7 +24,7 @@ public class AddMemberController {
 	private String msg="";
 	
 	@Autowired
-	private AddMemberService service;
+	private AddMemberDao service;
 	//AddMemberDao memberDao;
 
 	@RequestMapping(value = "/addMember", method = RequestMethod.GET)
@@ -34,7 +35,7 @@ public class AddMemberController {
 	@RequestMapping(value = "/addMember1", method = RequestMethod.POST)
 	public ModelAndView saveMemberInDB(@ModelAttribute("memberForm") AddMemberBean addMemberBean, BindingResult result,
 			Model model) {
-		int saveFlag = service.addMemberDetails(addMemberBean);
+		int saveFlag = (Integer)service.addMemberDetails(addMemberBean);
 		model.addAttribute("actionMessage", saveFlag > 0 ? "Member added Sucessfully" : "Member not added Sucessfully");
 		System.out.println("actionMessage Controller!!!!!!!!!!!!" + actionMessage);
 		//msg="Sucess";
@@ -78,7 +79,7 @@ public class AddMemberController {
 	public ModelAndView editSaveMember(@ModelAttribute("memberForm") AddMemberBean addMemberBean ,Model model) 
 	 {
 		
-		int editFlag = service.editsaveMemberDetails(addMemberBean);
+		int editFlag = (Integer)service.editsaveMemberDetails(addMemberBean);
 		System.out.println("editFlag!!!!!!!!!!!!" + editFlag);
 		model.addAttribute("actionMessage", editFlag > 0 ? "Member updated Sucessfully" : "Member not updated Sucessfully");
 		//return new ModelAndView("redirect:/displayMember.html");

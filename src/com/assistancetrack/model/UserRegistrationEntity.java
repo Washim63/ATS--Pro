@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name="user")
+@Table(name="assistancetracksystem.user")
 public class UserRegistrationEntity implements Serializable{
 	private static final long serialVersionUID = -723583058586873479L;
 	 public int getUserId() {
